@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserListService } from './user-list.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'userInformation';
+  response: any;
+  constructor(private userListService:UserListService){}
+
+  public getUserlist():void {
+    this.userListService.getuserList().
+    subscribe((res)=>{
+      this.response = res;
+      console.log(this.response);    
+    })
+  }
 }
