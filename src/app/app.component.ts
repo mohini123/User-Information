@@ -10,7 +10,7 @@ export class AppComponent {
   response: any;
   constructor(private userListService:UserListService){}
 
-  public getUserlist():void {
+  public getUserlist() {
     this.userListService.getuserList().
     subscribe((res)=>{
       this.response = res;
