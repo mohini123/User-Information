@@ -1,16 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Post } from './posts.model';
 @Injectable({
   providedIn: 'root'
 })
 export class UserListService {
+  private postsUrl = 'https://jsonplaceholder.typicode.com/posts';
 
   constructor(private http: HttpClient) { }
 
-  getuserList():Observable<any> {
-    const localUrl:string = 'https://jsonplaceholder.typicode.com/posts';
-    return this.http.get(localUrl);
+  /**
+   * Getusers list
+   * @returns list
+   */
+  getPosts() {
+    return this.http.get<Observable<Post>>(this.postsUrl)
+      .pipe(map(res => {
+        return res ? res : ''
+      }));
   }
 
 }
